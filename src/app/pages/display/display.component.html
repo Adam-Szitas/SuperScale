@@ -1,4 +1,4 @@
-<ui-table [tableData]="tasks$ | async"></ui-table>
+<ui-table [tableData]="tasks$ | async" (newTask)="addNewTask()"></ui-table>
 
 <ui-popup [status]="modalStatus">
   <ng-container *ngIf="editForm && !alertMessage">
@@ -16,32 +16,74 @@
             <option value="vacuum-clean">Vacuum clean</option>
           </select>
         </div>
-        <div class="field">
-          <label for="duration">Duration</label>
-          <input type="text" id="duration" formControlName="duration" placeholder="Duration">
-        </div>
-        <!-- <div class="field">
-          <label for="duration">Who</label>
-          <input type="text" id="duration" formControlName="duration" placeholder="Duration">
-        </div>
-        <div class="field">
-          <label for="duration">Duration</label>
-          <input type="text" id="duration" formControlName="duration" placeholder="Duration">
-        </div> -->
+        <ng-container *ngIf="editForm.get('type')?.value === 'wash-dishes'">
+          <div class="field">
+            <label for="duration">Duration</label>
+            <input type="text" id="duration" formControlName="duration" placeholder="Duration">
+          </div>
+        </ng-container>
+        <ng-container *ngIf="editForm.get('type')?.value === 'vacuum-clean'">
+          <div class="field">
+            <label for="person">Who</label>
+            <input type="text" id="person" formControlName="person" placeholder="Person">
+          </div>
+          <div class="field">
+            <label for="room">Room</label>
+            <input type="text" id="room" formControlName="room" placeholder="Room">
+          </div>
+        </ng-container>
         <div class="field button-field">
-          <button type="button" (click)="hidePopup()">Close</button>
-          <button type="submit">Change</button>
+          <button type="button" class="blue" (click)="hidePopup()">Close</button>
+          <button type="submit" class="green">Change</button>
         </div>
       </form>
     </div>
   </ng-container>
   <ng-container *ngIf="alertMessage && editForm">
-    <div class="form-wrapper delete">
+    <div class="form-wrapper">
       <h1>{{ alertMessage }}</h1>
-      <div class="field">
+      <div class="field button-field">
         <button type="button" class="blue" (click)="hidePopup()">No</button>
         <button type="button" class="red" (click)="deleteTask()">Yes</button>
       </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="showNewTaskForm && newTaskForm">
+    <div class="form-wrapper">
+      <form [formGroup]="newTaskForm" (ngSubmit)="submitNewTask()">
+        <h2>Please give new values</h2>
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" formControlName="name" placeholder="Name">
+        </div>
+        <div class="field">
+          <label for="type">Type</label>
+          <select type="text" id="type" formControlName="type" placeholder="Type">
+            <option value="wash-dishes">Wash dishes</option>
+            <option value="vacuum-clean">Vacuum clean</option>
+          </select>
+        </div>
+        <ng-container *ngIf="newTaskForm.get('type')?.value === 'wash-dishes'">
+          <div class="field">
+            <label for="duration">Duration</label>
+            <input type="text" id="duration" formControlName="duration" placeholder="Duration">
+          </div>
+        </ng-container>
+        <ng-container *ngIf="newTaskForm.get('type')?.value === 'vacuum-clean'">
+          <div class="field">
+            <label for="person">Who</label>
+            <input type="text" id="person" formControlName="person" placeholder="Person">
+          </div>
+          <div class="field">
+            <label for="room">Room</label>
+            <input type="text" id="room" formControlName="room" placeholder="Room">
+          </div>
+        </ng-container>
+        <div class="field button-field">
+          <button type="button" class="blue" (click)="hidePopup()">Close</button>
+          <button type="submit" class="green">Submit</button>
+        </div>
+      </form>
     </div>
   </ng-container>
 </ui-popup>

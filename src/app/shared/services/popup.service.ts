@@ -3,13 +3,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Task } from 'src/app/services/tasks/tasks.service';
 
 export enum Status{
-  alert,
-  form,
-  closed
+  shown,
+  hidden
 }
 
 const initialState: PopupState = {
-  state: Status.closed,
+  state: Status.hidden,
   form: null,
   alertMessage: null
 }
@@ -28,7 +27,7 @@ export class PopupService{
     const state: PopupState = {
       form: null,
       alertMessage: null,
-      state: Status.closed
+      state: Status.hidden
     }
     this.popupState.next(state);
   }

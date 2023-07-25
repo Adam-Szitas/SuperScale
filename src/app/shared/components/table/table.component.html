@@ -3,15 +3,22 @@
     <th>Name</th>
     <th>Type</th>
     <th>Duration</th>
+    <th>Room</th>
+    <th>Person</th>
     <th>Actions</th>
   </tr>
   <tr *ngFor="let data of tableData" [id]="data._id">
     <td>{{ data.name }}</td>
     <td>{{ data.type }}</td>
     <td>{{ data.fields.durationInHours }}</td>
+    <td>{{ data.fields.room }}</td>
+    <td>{{ data.fields.who }}</td>
     <td>
       <button type="button" class="bg-default" (click)="editElement(data)">Edit</button>
       <button type="button" class="bg-alert" (click)="deleteElement(data)">Delete</button>
     </td>
+  </tr>
+  <tr>
+    <button type="button" (click)="addNewTask()">Add new task</button>
   </tr>
 </table>

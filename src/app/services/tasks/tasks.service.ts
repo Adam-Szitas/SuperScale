@@ -17,22 +17,59 @@ export class TasksService{
     );
   }
 
-  public updateTask(task: any): Observable<any>{
+  public submitNewTask(task: TaskForm): Observable<any>{
     const body = {
       name: task.name,
       type: task.type,
-      fields: {
-        durationInHours: task.duration
-      }
+      fields: {}
     };
 
-    const headers = new HttpHeaders({'accept': 'application/json'})
+    if(task.type === 'vacuum-clean'){
+      body.fields = {
+        room: task.room,
+        who: task.person
+      }
+    }else{
+      body.fields = {
+        durationInHours: task.duration
+      }
+    }
+
+    const headers = new HttpHeaders({
+      'content-type': 'application/json',
+      'accept': '*/*'
+    })
+    return this.http.post(`${this.baseUrl}/tasks`, body, { headers }).pipe(
+      catchError(this.httpHandler.httpErrorHandler)
+    )
+  }
+
+  public updateTask(task: TaskForm): Observable<any>{
+    const body = {
+      name: task.name,
+      type: task.type,
+      fields: {}
+    };
+
+    if(task.type === 'vacuum-clean'){
+      body.fields = {
+        room: task.room,
+        who: task.person
+      }
+    }else{
+      body.fields = {
+        durationInHours: task.duration
+      }
+    }
+
+
+    const headers = new HttpHeaders({'content-type': 'application/json'})
     return this.http.put(`${this.baseUrl}/tasks/${task.id}`, body, { headers }).pipe(
       catchError(this.httpHandler.httpErrorHandler)
     )
   }
 
-  public deleteTask(task: any): Observable<any>{
+  public deleteTask(task: TaskForm): Observable<any>{
     const headers = new HttpHeaders({'accept': '*/*'});
     return this.http.delete(`${this.baseUrl}/tasks/${task.id}`, { headers }).pipe(
       catchError(this.httpHandler.httpErrorHandler)
@@ -46,6 +83,17 @@ export interface Task{
   __v: number;
   _id: string;
   fields: {
-    durationInHours: number;
+    durationInHours?: number | null;
+    room?: string | null;
+    who?: string | null;
   }
+}
+
+export interface TaskForm{
+  name: string;
+  type: string;
+  duration: string;
+  room: string;
+  person: string;
+  id: number;
 }

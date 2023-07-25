@@ -1,11 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Task, TasksService } from './services/tasks/tasks.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { PopupService, PopupState, Status } from './shared/services/popup.service';
-
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { TasksService } from './services/tasks/tasks.service';
+import { PopupService } from './shared/services/popup.service';
 
 @Component({
   selector: 'app-root',

@@ -10,9 +10,9 @@ import { Status } from '../../services/popup.service';
 })
 export class PopupComponent{
   @Input()
-  public status: Status = Status.closed;
+  public status: Status = Status.hidden;
 
   public showContent(): boolean {
-    return this.status !== Status.closed;
+    return this.status === Status.shown;
   }
 }
