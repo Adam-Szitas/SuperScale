@@ -1,0 +1,32 @@
+@import '../../style/spacings.scss';
+@import '../../style/colors.scss';
+
+table{
+  & button{
+    border: 0;
+    margin: $button-margin;
+    padding: $button-padding;
+    color: black;
+    transition: all .2s ease-in-out;
+
+    &.bg-default{
+      background-color: $blue;
+      &:hover{
+        background-color: $dark-blue;
+        color: white;
+      }
+    }
+    &.bg-alert{
+      background-color: $red;
+      &:hover{
+        background-color: $dark-red;
+        color: white;
+      }
+    }
+
+    &:hover{
+      cursor: pointer;
+
+    }
+  }
+}

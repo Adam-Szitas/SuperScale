@@ -1,0 +1,28 @@
+nav{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: rgb(45, 45, 45);
+  margin: 0;
+  padding: 5px;
+
+  & button{
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    color: white;
+    margin: 4px 8px;
+    padding: 8px 16px;
+
+    transition: box-shadow .2s ease-in-out;
+
+    &:hover{
+      cursor: pointer;
+      box-shadow: 0 0 10px rgb(255, 255, 255);
+    }
+
+    &.active{
+      background-color: rgb(99, 99, 99);
+    }
+  }
+}

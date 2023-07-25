@@ -1,0 +1,67 @@
+@import '../../shared/style/colors.scss';
+@import '../../shared/style/spacings.scss';
+
+div.form-wrapper{
+  background-color: white;
+  padding: 10px;
+  & form{
+    margin: 20px 10px;
+  }
+  & .field{
+    margin: 30px 0;
+    display: flex;
+    justify-content: space-around;
+    & label{
+      position: absolute;
+      margin-top: -20px;
+    }
+
+    & input, & select{
+      font-size: 18px;
+      padding: 2px 4px;
+      width: 100%;
+    }
+  }
+  & div.button-field{
+    display: flex;
+    justify-content: flex-end;
+
+    &>button{
+      border: 0;
+      padding: $button-padding;
+      margin: $button-margin;
+      background-color: $blue;
+      &:hover{
+        cursor: pointer;
+        background-color: $dark-blue;
+      }
+    }
+  }
+  &.delete {
+    & button{
+      border: 0;
+      padding: $button-padding;
+      margin: $button-margin;
+      transition: all .2 ease-in-out;
+
+      &:hover{
+        cursor: pointer;
+      }
+
+      &.red{
+        background-color: $red;
+        &:hover{
+          background-color: $dark-red;
+          color: white;
+        }
+      }
+      &.blue{
+        background-color: $blue;
+        &:hover{
+          background-color: $dark-blue;
+          color: white;
+        }
+      }
+    }
+  }
+}
